@@ -79,6 +79,20 @@ proof. Grows as phases land (see PLAN.md). Companion indexes:
 | `V = β log h` solves the HJB; Hopf–Cole linearizes it (linearly solvable control) | 04 |
 | Path KL = expected quadratic control cost (Girsanov dictionary) | 04 |
 
+## distillation/
+
+| Result | File |
+|---|---|
+| Consistency + boundary characterize the solution map (transport equation, characteristics) | 01 |
+| Linear accumulation: N consistency leaks ADD (the telescope) | 01 |
+| The skip parametrization enforces the boundary identically | 01 |
+| CD's fixed point is the teacher's map; solver order inherited as bias `O(h^p)` | 02 |
+| The CT input's conditional mean = the exact-score DDIM step | 02 |
+| CT's bias is a Jensen gap: `½∇²f[Cov]` with `Cov = O(h²)` | 02 |
+| The progressive-distillation target: the effective denoiser, inverted in closed form | 03 |
+| Halving is lossless for isotropic Gaussian data (frozen denoiser) | 03 |
+| Guided flow maps exist and distill soundly; only the law's pedigree stays open | 04 |
+
 ## The Recurring Instruments (so far)
 
 ```text

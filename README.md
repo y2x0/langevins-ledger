@@ -130,10 +130,18 @@ guidance_and_control/          steering, exactly and approximately
         the h-transform sampler, Hopf-Cole/HJB — the trilogy's bridge
     05  failure modes: the table of causes, each traced to a theorem
 
---- expansion (see PLAN.md for the per-file contract) ---
+distillation/                  collapsing the solver into one step
+    01  the consistency condition characterizes the solution map
+        (proved); linear accumulation — N leaks add; the free boundary
+    02  CD vs CT: the fixed-point theorem and inherited solver order;
+        the CT conditional-mean identity (= exact DDIM step) and its
+        Jensen-gap bias
+    03  progressive distillation: the effective-denoiser target
+        derived; lossless for Gaussians (proved); round accumulation
+    04  scoreboard: the guarantee chain assembled; the guided-teacher
+        question resolved; one curvature rules all few-step methods
 
-distillation/                  consistency models, progressive
-                               distillation, what each proof guarantees
+--- expansion (see PLAN.md for the per-file contract) ---
 discrete_diffusion/            CTMC reversal, masked diffusion's ELBO,
                                the bridge to attention-ledger
 statistical_theory/            score error propagation, minimax rates,
