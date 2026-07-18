@@ -141,9 +141,20 @@ distillation/                  collapsing the solver into one step
     04  scoreboard: the guarantee chain assembled; the guided-teacher
         question resolved; one curvature rules all few-step methods
 
+discrete_diffusion/            tokens, masks, and the attention bridge
+    01  the discrete Anderson theorem proved (master-equation level);
+        the masking chain solved
+    02  the ELBO collapses to weighted masked cross-entropy (MDLM);
+        schedule invariance; MLM = one-step denoiser
+    03  discrete Tweedie (ratio = posterior) and the Bregman
+        projection lemma — the series' trick, proved once
+    04  masked diffusion = any-order autoregression (the Beta-integral
+        theorem); AR as the degenerate schedule
+    05  the parallel-decoding tax = conditional total correlation,
+        proved with a worked half-mass-impossible example
+
 --- expansion (see PLAN.md for the per-file contract) ---
-discrete_diffusion/            CTMC reversal, masked diffusion's ELBO,
-                               the bridge to attention-ledger
+
 statistical_theory/            score error propagation, minimax rates,
                                memorization vs generalization
 ```
