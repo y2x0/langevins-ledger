@@ -60,6 +60,25 @@ proof. Grows as phases land (see PLAN.md). Companion indexes:
 | In d = 1 the FM flow map is monotone, hence optimal transport | 05 |
 | The FM path ≠ the OT geodesic (the two-atom bulge, exact) | 05 |
 
+## guidance_and_control/
+
+| Result | File |
+|---|---|
+| `h_t(x_t)` is a reverse-time martingale (tower property) | 01 |
+| The h-transform adds `g²∇log h` to the drift (generator computation) | 01 |
+| Exact conditioning = the Doob h-transform of the reverse process | 01 |
+| The plug-in guidance error is exactly `g²∇log(h/ĥ)` — expectation vs plug-in | 01 |
+| The Gaussian ω-family exactly: `Λ_ω = ωΛ_c + (1−ω)Λ_u`, mean extrapolation | 02 |
+| CFG variance shrinks below the conditional, monotonically in ω | 02 |
+| The Jensen gap ≤ `(b−a)²/8` (Hoeffding's lemma under the posterior) | 02 |
+| ω → ∞ is classifier ascent (sampling degenerates into optimization) | 02 |
+| Exact inverse-problem guidance for Gaussian priors: `S_t = A C_t Aᵀ + σ_y²I` | 03 |
+| DPS deletes the posterior covariance — overweighting ratio computed (×51) | 03 |
+| KL-regularized reward fine-tuning: closed form `dQ*/dP ∝ e^{r/β}` (path space) | 04 |
+| The optimum is the h-transform of the pretrained sampler by `E[e^{r/β}|x_t]` | 04 |
+| `V = β log h` solves the HJB; Hopf–Cole linearizes it (linearly solvable control) | 04 |
+| Path KL = expected quadratic control cost (Girsanov dictionary) | 04 |
+
 ## The Recurring Instruments (so far)
 
 ```text
@@ -76,12 +95,18 @@ p ∇log p = ∇p                  Anderson's reversal, the PF-ODE, the
                                λ-family (foundations/03), Langevin
                                stationarity (samplers/06) — the
                                score's whole job, four theorems
-the exponential tilt           classifier-free guidance (05): the same
-                               Legendre/tilting transform as
-                               bellmans-ledger rlhf/02 and
-                               attention-ledger's softmax — now
-                               indexed by noise level, where it stops
+the exponential tilt           CFG (foundations/05), reward fine-tuning
+                               on path space (guidance/04 — the SAME
+                               one-line proof as bellmans-ledger
+                               rlhf/02), and Todorov's desirability
+                               z = e^{V/β} (guidance/04 = bellmans
+                               lqr/04): one transform, three ledgers,
+                               and the noise index is where it stops
                                being consistent (the Jensen gap)
+h = E[terminal | x_t]          the h-transform triple: conditioning
+                               (guidance/01), measurements
+                               (guidance/03), rewards (guidance/04) —
+                               one martingale, three steering problems
 softmax retrieval              the empirical score (06) IS
                                attention-ledger foundations/01's
                                kernel smoother; temperature = σ_t²

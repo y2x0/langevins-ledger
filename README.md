@@ -119,11 +119,18 @@ flow_matching/                 the path coordinate, unified and fenced
     05  what FM is not: 1-D IS optimal transport (proved); the path
         is not the geodesic (worked bulge example); straight != OT
 
---- expansion (see PLAN.md for the per-file contract) ---
+guidance_and_control/          steering, exactly and approximately
+    01  Doob h-transforms: conditioning = h-transform, proved; the
+        plug-in error identified exactly
+    02  CFG deep dive: the Gaussian omega-family solved (shrink +
+        overshoot), the (b-a)^2/8 gap bound, the omega -> inf endpoint
+    03  inverse problems: exact Gaussian guidance derived; DPS's
+        deleted covariance, priced (x51 at high noise)
+    04  reward fine-tuning = KL control: the path-space closed form,
+        the h-transform sampler, Hopf-Cole/HJB — the trilogy's bridge
+    05  failure modes: the table of causes, each traced to a theorem
 
-guidance_and_control/          Doob h-transforms, posterior sampling,
-                               reward fine-tuning as KL control — the
-                               bridge to Bellman's Ledger
+--- expansion (see PLAN.md for the per-file contract) ---
 distillation/                  consistency models, progressive
                                distillation, what each proof guarantees
 discrete_diffusion/            CTMC reversal, masked diffusion's ELBO,

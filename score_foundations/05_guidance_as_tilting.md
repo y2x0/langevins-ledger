@@ -144,11 +144,17 @@ stochastic control problem, and doing it exactly is
 
 ## What Remains Open
 
-The nonperturbative question (what does `\omega`-CFG sample, as a
-function of data and schedule — no answer beyond Gaussian cases and
-the first-order gap above); principled `\omega` schedules (interval
-guidance works empirically; the theorem suggests WHY — gate the
-guidance where posteriors are diffuse — but no optimality result
-exists); and the interaction with distillation (phase D): one-step
+Partially closed by the retrofits from `guidance_and_control/02`: the
+Gaussian `\omega`-family is now solved exactly there
+(`\Lambda_\omega = \omega\Lambda_c + (1-\omega)\Lambda_u`: variance
+shrinks below the conditional and the mean extrapolates past it,
+monotonically in `\omega`); the Jensen gap is bounded by
+`(b-a)^2/8` via Hoeffding's lemma, making interval guidance a
+corollary of the gap's noise-level profile rather than a trick; and
+the `\omega \to \infty` endpoint is identified as classifier ascent
+(sampling degenerating into optimization). Still genuinely open: the
+nonperturbative middle (`\omega` large but finite on non-Gaussian
+data), optimality of any guidance schedule, and the distillation
+interaction (`guidance_and_control/05` item 4; phase D) — one-step
 students of guided teachers inherit a target that is not a
 distribution, and what THEY sample is doubly open.
