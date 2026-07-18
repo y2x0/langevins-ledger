@@ -1,0 +1,129 @@
+# Langevin's Ledger
+
+*The mathematics of diffusion models — every path priced, every
+hypothesis audited.*
+
+Third of three. Companion repositories:
+[Bellman's Ledger](https://github.com/y2x0/bellmans-ledger) (the
+mathematics of decisions) and
+[attention-ledger](https://github.com/y2x0/attention-ledger) (the
+mathematics of sequence models). Same rules: no survey files, nothing
+transcribable from a blog post; every file carries at least one theorem
+proved in full or a counterexample worked with explicit numbers, a
+load-bearing hypothesis audit, and an honest "what remains open."
+The index of proved results is [THEOREMS.md](THEOREMS.md); the
+per-file contracts are in [PLAN.md](PLAN.md).
+
+This notebook family asks:
+
+```text
+What distribution does the sampler actually draw from, how does error
+in the learned score propagate through the solver, and which design
+choices are theorems rather than conventions?
+```
+
+Every diffusion-family method transports a reference measure to the
+data measure along a path of distributions. Methods differ in exactly
+three coordinates:
+
+```math
+\big(\ \mathcal{P},\ s,\ \mathcal{S}\ \big)
+```
+
+```text
+P:
+    the path — which family {p_t} connects data to noise (VP/VE
+    Ornstein–Uhlenbeck, flow-matching interpolants, masking chains on
+    discrete spaces) and which forward process realizes it
+
+s:
+    the estimand — which one function is regressed from data (score
+    grad log p_t, noise eps, denoiser E[x_0|x_t], velocity v), all
+    affinely equivalent along Gaussian paths, none equivalent in loss
+    weighting
+
+S:
+    the solver — how the path is traversed at sampling time (reverse
+    SDE, probability-flow ODE, ancestral steps, exponential
+    integrators, distilled one-step maps) and what each does to score
+    error
+```
+
+Each notebook should answer:
+
+```text
+1. Which object on which coordinate is being constructed or analyzed?
+2. What is proved about it — exactly, and in which metric?
+3. Which hypothesis is load-bearing, and where in the proof?
+4. What breaks when it is violated — worked, not gestured?
+5. What does the sampler provably output, versus what it is said to?
+6. What remains open?
+```
+
+## Source Texts
+
+| Reading | Where it lives here |
+|---|---|
+| Anderson 1982 (time reversal) | `score_foundations/03` |
+| Vincent 2011 (denoising score matching) | `score_foundations/02` |
+| Ho–Jain–Abbeel 2020 (DDPM); Song et al. 2021 (SDE) | `score_foundations/01, 03–04` |
+| Song–Meng–Ermon 2021 (DDIM) | `score_foundations/04` |
+| Ho–Salimans 2022 (CFG); Dhariwal–Nichol 2021 | `score_foundations/05` |
+| Chen–Chewi et al. 2023 (convergence) | `samplers_and_convergence/` |
+| Lipman et al. 2023 (flow matching); Albergo–Vanden-Eijnden | `flow_matching/` |
+| Song et al. 2023 (consistency models) | `distillation/` |
+| Lou–Meng–Ermon 2024; Sahoo et al. 2024 (discrete/masked) | `discrete_diffusion/` |
+
+## Folder Map
+
+```text
+score_foundations/             the objects, exactly
+    01  the forward process: closed-form marginals proved, W2
+        contraction to the prior, DDPM as exact discretization
+    02  Tweedie and the estimands: the formula proved, the affine
+        dictionary, Vincent's theorem (denoising = score matching)
+    03  time reversal: Anderson's SDE proved at the Fokker–Planck
+        level; the probability-flow ODE; the lambda-family
+    04  DDPM and DDIM: the Gaussian posterior derived, the ELBO as
+        weighted regression, DDIM = exact PF-ODE step (proved)
+    05  guidance as tilting: classifier guidance proved; CFG's target
+        is not a diffusion path — the Jensen-gap theorem
+    06  the solvable cases: Gaussian data (exact), empirical data
+        (the score IS attention; the memorization theorem)
+
+--- expansion (see PLAN.md for the per-file contract) ---
+
+samplers_and_convergence/      Girsanov error decomposition, polynomial
+                               convergence, ODE vs SDE error dynamics
+flow_matching/                 the CFM identity, interpolants, rectified
+                               flow, the score dictionary, the OT fence
+guidance_and_control/          Doob h-transforms, posterior sampling,
+                               reward fine-tuning as KL control — the
+                               bridge to Bellman's Ledger
+distillation/                  consistency models, progressive
+                               distillation, what each proof guarantees
+discrete_diffusion/            CTMC reversal, masked diffusion's ELBO,
+                               the bridge to attention-ledger
+statistical_theory/            score error propagation, minimax rates,
+                               memorization vs generalization
+```
+
+## Notation
+
+```math
+\mathrm{d}x = -\tfrac{\beta_t}{2}\,x\,\mathrm{d}t + \sqrt{\beta_t}\,\mathrm{d}W
+\qquad\text{(VP forward)},
+```
+
+```math
+\alpha_t = e^{-\frac12\int_0^t\beta},\qquad
+\sigma_t^2 = 1-\alpha_t^2,\qquad
+p_t = \mathrm{Law}(x_t),\qquad
+s_t(x) = \nabla\log p_t(x).
+```
+
+Data measure `p_0` on `R^d`; prior `gamma = N(0, I)`; hats denote
+learned or estimated quantities; `k_t(x|x_0) = N(x; alpha_t x_0,
+sigma_t^2 I)` is the forward kernel. Discrete time uses `bar-alpha_k`
+products in the DDPM convention, and `04` proves the two conventions
+agree.
