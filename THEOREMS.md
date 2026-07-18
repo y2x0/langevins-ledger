@@ -93,6 +93,23 @@ proof. Grows as phases land (see PLAN.md). Companion indexes:
 | Halving is lossless for isotropic Gaussian data (frozen denoiser) | 03 |
 | Guided flow maps exist and distill soundly; only the law's pedigree stays open | 04 |
 
+## discrete_diffusion/
+
+| Result | File |
+|---|---|
+| The discrete Anderson theorem: reverse rates `Q̄(y,x) = Q(x,y)p(x)/p(y)` | 01 |
+| The masking chain solved: two-point marginals, survival `α_t` | 01 |
+| The masked posterior: keep the mask or reveal the truth (two cases) | 02 |
+| The ELBO collapses to schedule-weighted masked cross-entropy (MDLM) | 02 |
+| Schedule invariance: the `du/u` substitution | 02 |
+| Discrete Tweedie: the ratio = `α/(1−α)` × the masked-token posterior | 03 |
+| The Bregman projection lemma: every Bregman regression learns `E[A|X]` | 03 |
+| Score entropy = the KL-Bregman instance; positivity by loss geometry | 03 |
+| Masked diffusion ELBO = expected any-order AR likelihood (Beta integral) | 04 |
+| Left-to-right AR = the deterministic suffix-mask schedule | 04 |
+| The parallel-decoding tax = conditional total correlation (exact KL identity) | 05 |
+| The two-token worked case: one-step reveal puts half its mass on impossible strings | 05 |
+
 ## The Recurring Instruments (so far)
 
 ```text
@@ -101,10 +118,14 @@ insert-the-kernel-and-divide   Tweedie (02), Vincent's cross term (02),
                                empirical posterior (06), the
                                interpolant score (flow_matching/02) —
                                one manipulation, five theorems
-conditional-expectation        Vincent (foundations/02), CFM
-projection under L2            (flow_matching/01), and the discrete
-                               version to come (E/03) — the trick that
-                               makes every estimand trainable
+the Bregman projection lemma   the series' projection trick, now ONE
+                               theorem (discrete_diffusion/03): L2
+                               gives Vincent (foundations/02), CFM
+                               (flow_matching/01), and the CT identity
+                               (distillation/02); the KL-Bregman gives
+                               score entropy — every estimand in the
+                               repository is trainable by one lemma
+                               at some convex phi
 p ∇log p = ∇p                  Anderson's reversal, the PF-ODE, the
                                λ-family (foundations/03), Langevin
                                stationarity (samplers/06) — the
