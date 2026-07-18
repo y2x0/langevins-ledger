@@ -24,14 +24,16 @@ is simultaneously the copyright, privacy, and creativity question;
 it is the field's most consequential open problem and this
 repository's first.
 
-**2. The guidance-times-solver theorem.** Flagged in five files: the
-drift-error profiles are proved (`guidance/01–03`), the
-transport-vs-contraction dynamics are proved (`A/05`, `01` here — the
-propagator), the displacement constants are proved (`04`). Missing:
-one composed bound — what a guided, discretized, `\lambda`-noised
-sampler outputs, as a function of `(\omega, \lambda, K, t_{\min})`.
-Every ingredient exists in this repository; the assembly is a paper
-nobody has written.
+**2. The guidance-times-solver theorem.** CLOSED at the level posed,
+by retrofit: `guidance_and_control/06` assembles the composed bound —
+KL to the true conditional `\le` prior + `C_\lambda\int g^2\,[`score
+error + plug-in error + `(\omega-1)^2\times`classifier Fisher`]` with
+`C_\lambda = 3(1+\lambda^2)^2/8\lambda^2` uniquely minimized at
+`\lambda = 1`, discretization attaching as in `A/03`, and the ODE
+endpoint covered by the `W_2` complement. Still open at the level it
+deserves: tight constants, the `\lambda_t`-schedule optimum against
+the composite integrand, and the trainable-norm/strong-metric
+mismatch the assembly inherits unchanged.
 
 **3. Mode weights.** `A/06` proved the mechanism (weights decided at
 high noise, where merging modes make the score maximally

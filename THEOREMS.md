@@ -78,6 +78,8 @@ proof. All six phases of PLAN.md are complete. Companion indexes:
 | The optimum is the h-transform of the pretrained sampler by `E[e^{r/β}|x_t]` | 04 |
 | `V = β log h` solves the HJB; Hopf–Cole linearizes it (linearly solvable control) | 04 |
 | Path KL = expected quadratic control cost (Girsanov dictionary) | 04 |
+| The composite theorem: KL ≤ prior + C_λ∫g²[score + plug-in + (ω−1)²·Fisher] | 06 |
+| `C_λ = 3(1+λ²)²/8λ²` uniquely minimized at λ = 1 (the SDE is the robust point) | 06 |
 
 ## distillation/
 

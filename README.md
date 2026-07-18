@@ -129,6 +129,9 @@ guidance_and_control/          steering, exactly and approximately
     04  reward fine-tuning = KL control: the path-space closed form,
         the h-transform sampler, Hopf-Cole/HJB — the trilogy's bridge
     05  failure modes: the table of causes, each traced to a theorem
+    06  the composite theorem: guidance x solver x estimation in one
+        KL bound; C_lambda minimized at lambda = 1 (added post-F,
+        closing statistical_theory/05's problem 2)
 
 distillation/                  collapsing the solver into one step
     01  the consistency condition characterizes the solution map

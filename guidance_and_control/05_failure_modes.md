@@ -130,10 +130,11 @@ this file is the receipts, filed.
 
 ## What Remains Open
 
-The guidance-times-solver theorem (the family's thrice-flagged gap:
-one bound combining `01/03`'s drift error profile with `A/05`'s
-transport-vs-contraction dynamics — all pieces exist, nobody has
-assembled them); reward-model uncertainty as a first-class object
+The guidance-times-solver theorem — assembled after this file first
+shipped: `06` now proves the composite KL bound (four budgets, one
+solver factor, `\lambda = 1` optimal), closing the thrice-flagged gap
+at the level posed; its own open list (tight constants, the
+`\lambda_t` schedule) inherits the mantle; reward-model uncertainty as a first-class object
 (tilting by a POSTERIOR over rewards rather than a point estimate —
 the Bayesian repair to failure 3, with the `rlhf/05` KL-budget
 heuristic as its crude shadow); and diversity accounting under
