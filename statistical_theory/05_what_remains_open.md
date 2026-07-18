@@ -35,12 +35,15 @@ deserves: tight constants, the `\lambda_t`-schedule optimum against
 the composite integrand, and the trainable-norm/strong-metric
 mismatch the assembly inherits unchanged.
 
-**3. Mode weights.** `A/06` proved the mechanism (weights decided at
-high noise, where merging modes make the score maximally
-estimation-sensitive) and `01`'s propagator says high-noise errors
-survive ODE sampling untouched. Missing: a bound on relative mode
-masses under score error `\varepsilon_{sc}` — the quantity behind
-every "diversity" claim, unpriced.
+**3. Mode weights.** CLOSED at the level posed, by retrofit: `06`
+proves the bound — the mode posterior is a reverse-time martingale
+under the `\lambda = 1` sampler (and only it: the `\lambda^2-1`
+defect computed), giving `|\hat w - w| \le` score error times the
+MODE-FISHER BUDGET, which for the two-point case is a dimensionless
+`O(1)` constant concentrated at the merge scale `\sigma \approx a`:
+one bit of mode identity, one unit of Fisher, spent in one window.
+Still open there: the general-`K` merge-hierarchy theorem and the
+window-localized empirical measurement the bound licenses.
 
 **4. The metric gap.** The theory's currencies (KL, TV, `W_2`) and
 generation's currency (perceptual/semantic quality) are known to

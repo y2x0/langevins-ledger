@@ -126,6 +126,9 @@ proof. All six phases of PLAN.md are complete. Companion indexes:
 | Denoiser regularity: flat off the medial axis, σ⁻² spike on it (one derivative) | 04 |
 | The subspace case: normal score exactly `−x⊥/σ²`; denoiser = bounded projection | 04 |
 | Guidance displacement `x⊥* = ωcσ_t²` (the failure-mode toy, promoted) | 04 |
+| The mode posterior is a λ=1 reverse-time martingale; the `λ²−1` defect computed | 06 |
+| The mode-weight bound: `|ŵ−w| ≤` score error × the mode-Fisher budget | 06 |
+| The budget is O(1) and spent at the merge scale (one bit, one window) | 06 |
 
 ## The Recurring Instruments
 

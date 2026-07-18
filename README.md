@@ -167,6 +167,9 @@ statistical_theory/            score error is the whole game
         ladder, and the medial-axis spike — one tanh formula
     05  what remains open: the six cross-cutting problems; the
         trilogy, closed
+    06  mode weights: the martingale/defect lemma, the mode-Fisher
+        budget = O(1) at the merge scale (added post-F, closing
+        problem 3)
 ```
 
 All six families of PLAN.md are complete (31 files). The index of

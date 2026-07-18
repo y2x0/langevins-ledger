@@ -159,11 +159,11 @@ mixing) saves the enterprise.
 
 ## What Remains Open
 
-Quantitative mode-weight accuracy: the "weights decided at high
-noise" mechanism lacks a theorem bounding the error in RELATIVE mode
-masses as a function of score error at the noise scale where modes
-merge — arguably the most practically consequential open question in
-the family (sample quality metrics are mode-weight sensitive);
+Quantitative mode-weight accuracy — closed by retrofit:
+`statistical_theory/06` proves the mode-weight bound (score error
+times an `O(1)` mode-Fisher budget concentrated at the merge scale),
+making the "weights decided at high noise" mechanism two-sided:
+decided early, undecidable late;
 optimal corrector placement and budget (the exchange-rate reading
 suggests corrector steps belong at mid-noise: no proof); and LSI
 constants along the ACTUAL path `\{p_t\}` for structured data —
