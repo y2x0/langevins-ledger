@@ -133,10 +133,15 @@ choice and the probabilistic choice are the same choice.
 
 ## What Remains Open
 
-The capacity-allocation question the perplexity gap poses (how much
-worse is a fixed budget spread over `2^L` conditionals — a
-statistical problem with no clean answer; phase F's tools, discrete
-version, unbuilt); optimal ORDER learning (the theorem averages over
+The capacity-allocation question the perplexity gap poses is now
+ANSWERED at the lookup-table level (`statistical_theory/08`): the
+any-order model must represent `L(1+|V|^{-1})^{L-1}` times as many
+conditional cells as a fixed-order model — `\approx L` for large
+vocabularies (the perplexity gap is mild for natural text),
+exponential in `L` for small alphabets — and the excess-risk identity
+there makes "the observed gap is the constraint's price" exact; what
+stays open is the covering-number version for a real (non-table)
+network; optimal ORDER learning (the theorem averages over
 uniform orders; learned or data-adapted order distributions exit the
 ELBO equivalence and their objectives are only partially understood —
 statements); and whether the equivalence extends to the uniform

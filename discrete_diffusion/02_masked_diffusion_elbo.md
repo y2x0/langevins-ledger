@@ -148,7 +148,9 @@ costume (the weighting that optimizes likelihood is fixed by the
 corollary; the weighting that optimizes generation quality is not,
 and practice deviates — the third repository where this gap appears
 and stays open); and conditioning richer than
-masks (`p_\theta(x_0^\ell|x_t)` sees a PARTIAL sequence: how much of
-the masked-LM estimation burden comes from ragged contexts is a
-statistical question phase F's tools could pose on discrete spaces
-and nobody has).
+masks (`p_\theta(x_0^\ell|x_t)` sees a PARTIAL sequence: the
+ragged-context estimation burden is now posed and partly answered in
+`statistical_theory/08` — the table estimator's rate is
+`(|V|-1)m/2n` in the well-sampled regime `n\gtrsim m\log m` and
+minimax-bad below it, which is exactly this burden quantified; the
+structured-denoiser rate that beats the table is the open remainder).

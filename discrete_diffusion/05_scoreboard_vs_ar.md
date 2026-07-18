@@ -141,11 +141,15 @@ ceiling on serial computation binds both.
 
 ## What Remains Open
 
-TC-optimal reveal schedules (the theorem defines the objective —
-minimize summed conditional total correlation under a step budget —
-an information-theoretic scheduling problem nobody has attacked
-directly; confidence heuristics are its greedy shadow); estimation
-rates for the discrete denoiser (F's missing discrete chapter);
+TC-optimal reveal schedules are now CLOSED in structure
+(`statistical_theory/08`): the total tax obeys the exact identity
+`T = C - \sum_\ell I(x_\ell;\mathrm{pred}(\ell))`, so minimizing tax
+= maximizing each token's mutual information with its predecessors,
+with the serial schedule the unconstrained optimum and confidence
+heuristics the greedy surrogate; whether the objective is submodular
+(hence the heuristic a `1-1/e` guarantee) is the open remainder.
+Estimation rates for the discrete denoiser are now built (`08`'s
+excess-risk identity and multinomial floor — F's discrete chapter);
 principled hybrid decoders (AR over blocks, diffusion within — the
 tax theorem says exactly when block boundaries are cheap, unused);
 and the reasoning question the bridge sharpens: whether

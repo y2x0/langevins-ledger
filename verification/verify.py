@@ -177,5 +177,97 @@ check("CFM floor: Wronskian identity (MC) + trig path = pi^2/4 minimal",
       f"MC resid={resid:.4f} vs {floor_th:.4f}; "
       f"trig={fl_trig:.4f} vs pi^2/4={np.pi**2/4:.4f}; quad={fl_quad:.4f}")
 
+# -- statistical_theory/08: the discrete excess-risk identity ----------------
+# L=3 binary sequences, random joint; check L(theta) - H = order-averaged KL
+# (mean-field model, so the identity is nontrivially exercised), and that the
+# entropy-telescope Sum w H(x^l|x_R) = H(x0).
+from itertools import product as iproduct
+from math import factorial as fac
+L8 = 3
+states = list(iproduct([0, 1], repeat=L8))
+pj = rng.random(len(states))**2; pj /= pj.sum()          # random joint on {0,1}^3
+P = {s: pj[i] for i, s in enumerate(states)}
+def marg(idxs, vals):                                    # P(x_idxs = vals)
+    return sum(P[s] for s in states if all(s[i] == v for i, v in zip(idxs, vals)))
+H_joint = -sum(p * np.log(p) for p in pj if p > 0)
+# mean-field model q(x^l) = marginal of position l
+q = [[marg([l], [b]) for b in (0, 1)] for l in range(L8)]
+def w8(R):                                               # Beta weight, |R| given
+    return fac(len(R)) * fac(L8 - 1 - len(R)) / fac(L8)
+# LHS: order-averaged conditional KL of true cond vs mean-field q
+lhs8 = 0.0; ent_tel = 0.0
+for l in range(L8):
+    others = [i for i in range(L8) if i != l]
+    for r in range(len(others) + 1):
+        from itertools import combinations
+        for R in combinations(others, r):
+            for vals in iproduct([0, 1], repeat=len(R)):
+                pR = marg(list(R), list(vals))
+                if pR <= 0:
+                    continue
+                cond = [marg([l] + list(R), [b] + list(vals)) / pR for b in (0, 1)]
+                kl = sum(c * np.log(c / q[l][b]) for b, c in enumerate(cond) if c > 0)
+                Hc = -sum(c * np.log(c) for c in cond if c > 0)
+                lhs8 += w8(R) * pR * kl
+                ent_tel += w8(R) * pR * Hc
+# RHS: L(theta) - H, with L(theta) = sum w E[-log q]
+Ltheta = 0.0
+for l in range(L8):
+    others = [i for i in range(L8) if i != l]
+    for r in range(len(others) + 1):
+        for R in combinations(others, r):
+            for vals in iproduct([0, 1], repeat=len(R)):
+                for b in (0, 1):
+                    pjoint = marg([l] + list(R), [b] + list(vals))
+                    if pjoint > 0:
+                        Ltheta += w8(R) * pjoint * (-np.log(q[l][b]))
+check("discrete excess-risk: L(theta)-H = order-avg KL; entropy telescope",
+      abs((Ltheta - H_joint) - lhs8) < 1e-9 and abs(ent_tel - H_joint) < 1e-9,
+      f"L-H={Ltheta-H_joint:.5f} vs KL={lhs8:.5f}; telescope={ent_tel:.5f} vs H={H_joint:.5f}")
+
+# -- statistical_theory/08: multinomial KL floor (|V|-1)/2n ------------------
+V8, n8, trials = 4, 400, 6000
+ptrue = rng.random(V8); ptrue /= ptrue.sum()
+kls = []
+for _ in range(trials):
+    counts = rng.multinomial(n8, ptrue)
+    phat = (counts + 0.5) / (n8 + V8 * 0.5)              # KT smoothing (audit)
+    kls.append(np.sum(ptrue * np.log(ptrue / phat)))
+floor = (V8 - 1) / (2 * n8)
+check("multinomial KL floor E[KL] = (|V|-1)/2n",
+      abs(np.mean(kls) - floor) < 0.4 * floor,
+      f"E[KL]={np.mean(kls):.5f} vs (|V|-1)/2n={floor:.5f}")
+
+# -- statistical_theory/08: the scheduling identity T = C - sum I(x;pred) ----
+# reuse the L=3 joint; test serial, one-shot, and a 2-block schedule.
+def H_set(idxs):
+    if not idxs: return 0.0
+    tot = {}
+    for s in states:
+        key = tuple(s[i] for i in idxs); tot[key] = tot.get(key, 0.0) + P[s]
+    return -sum(p * np.log(p) for p in tot.values() if p > 0)
+def I_pred(l, pred):
+    return H_set([l]) + H_set(pred) - H_set(sorted([l] + pred))
+def tax_direct(blocks):                                  # sum_j TC(S_j | c_j)
+    T = 0.0; c = []
+    for S in blocks:
+        # TC(S|c) = sum_l H(x_l|c) - H(x_S|c) = sum_l[H(l,c)-H(c)] -[H(S,c)-H(c)]
+        Hc = H_set(c)
+        T += sum(H_set(sorted([l] + c)) - Hc for l in S) - (H_set(sorted(S + c)) - Hc)
+        c = sorted(c + S)
+    return T
+C8 = sum(H_set([l]) for l in range(L8)) - H_joint
+ok8 = True
+for blocks in [[[0], [1], [2]], [[0, 1, 2]], [[0, 2], [1]]]:
+    pred_sum = 0.0; revealed = []
+    for S in blocks:
+        for l in S: pred_sum += I_pred(l, revealed)
+        revealed = sorted(revealed + S)
+    ok8 &= abs(tax_direct(blocks) - (C8 - pred_sum)) < 1e-9
+check("reveal-schedule identity T = C - sum I(x;pred) (3 schedules)",
+      ok8 and abs(tax_direct([[0, 1, 2]]) - C8) < 1e-9
+      and abs(tax_direct([[0], [1], [2]])) < 1e-9,
+      f"C={C8:.5f}; one-shot tax=C, serial tax=0 both verified")
+
 print(f"\n{sum(PASS)}/{len(PASS)} checks passed")
 raise SystemExit(0 if all(PASS) else 1)

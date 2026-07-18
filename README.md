@@ -174,6 +174,9 @@ statistical_theory/            score error is the whole game
         in the Gaussian caricature — one measure rules grid and
         weight; the endpoint dichotomy (added post-F, closing
         problem 6)
+    08  discrete estimation: the excess-risk identity, the multinomial
+        rate and the any-order capacity count, the reveal-schedule
+        information identity (added post-F, closing problem 5)
 ```
 
 All six families of PLAN.md are complete (31 files). The index of

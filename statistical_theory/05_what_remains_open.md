@@ -52,15 +52,22 @@ former and silent in the latter. Even a task-restricted theorem
 connecting a proved divergence to a perceptual metric would change
 what the whole theory can promise. Nothing exists.
 
-**5. Discrete estimation.** Phase E built the discrete objects and
-their exact identities; phase F's estimation theory has no discrete
-chapter — rates for masked-denoiser learning over `|V|^L` states,
-the capacity cost of any-order consistency
-(`discrete_diffusion/04`'s constraint), and TC-optimal reveal
-scheduling (`05` there) are all open, all well-posed, and all
-attackable with the tools already on the shelf (covering numbers
-from attention-ledger's phase H, the Bregman lemma, the
-total-correlation identity).
+**5. Discrete estimation.** CLOSED at the level posed, by retrofit:
+`08` supplies phase F's discrete chapter. The discrete excess-risk
+identity — masked-diffusion loss minus data entropy = the
+order-averaged conditional KL, the discrete Vincent norm; the
+estimation rate — per-context multinomial floor `(|V|-1)/2n_R`, with
+the any-order model's conditional count exceeding a fixed order's by
+EXACTLY `L(1+|V|^{-1})^{L-1}` (`\approx L` for large vocabularies,
+exponential for small — the capacity cost of `E/04`'s constraint,
+by counting); and the scheduling identity — the reveal tax is
+`T = C - \sum_\ell I(x_\ell;\mathrm{pred}(\ell))`, serialization
+buying back each token's predecessor information, with TC-optimal
+scheduling a clean information maximization (`E/05` closed). Still
+open there: the covering-number rate for a REAL denoiser (the phase-H
+bridge, now with an explicit target), the ragged-context regime
+`n \lesssim m\log m`, submodularity of the schedule objective, and
+the uniform-chain (score-entropy) estimand where the telescope dies.
 
 **6. Design against the ledgers.** CLOSED at the level posed, by
 retrofit: `07` solves each dial in the Gaussian caricature. The

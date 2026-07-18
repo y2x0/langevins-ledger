@@ -134,6 +134,10 @@ proof. All six phases of PLAN.md are complete. Companion indexes:
 | The CFM floor = the angular energy `∫ρ²θ̇²` (the Wronskian identity, polar) | 07 |
 | The trigonometric path uniquely minimizes the VP floor (value `π²/4`) | 07 |
 | The endpoint dichotomy: velocity floor and score target never both integrable; the bridge rate is critical | 07 |
+| The discrete excess-risk identity: masked loss − data entropy = order-averaged conditional KL | 08 |
+| The multinomial KL floor `(|V|−1)/2n_R` (Pearson's exact mean) | 08 |
+| The conditional count: any-order/AR ratio = `L(1+|V|⁻¹)^{L−1}` (≈L large-vocab, exp. small) | 08 |
+| The reveal-schedule identity `T = C − Σ I(x_ℓ; predecessors)`; serial is the zero-tax optimum | 08 |
 
 ## The Recurring Instruments
 
