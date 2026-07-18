@@ -91,10 +91,22 @@ score_foundations/             the objects, exactly
     06  the solvable cases: Gaussian data (exact), empirical data
         (the score IS attention; the memorization theorem)
 
+samplers_and_convergence/      what the sampler provably outputs
+    01  EM discretization: the exact Gaussian bias 1/(1-beta h/4);
+        where the dimension enters; schedule sensitivity
+    02  exponential integrators: the quadrature identity proved,
+        DDIM as zeroth order, DPM-Solver's orders derived
+    03  the Girsanov decomposition proved: prior + score error +
+        discretization, with the audit that keeps it honest
+    04  polynomial convergence assembled: Chen-Chewi and Benton et
+        al. stated, every term traced, five things it does NOT say
+    05  ODE vs SDE error dynamics: transport vs contraction proved
+        exactly; the B/2 vs 2 amplification gap; the lambda price
+    06  Langevin correctors: de Bruijn and LSI decay proved; the
+        multimodal boundary and the third metastability
+
 --- expansion (see PLAN.md for the per-file contract) ---
 
-samplers_and_convergence/      Girsanov error decomposition, polynomial
-                               convergence, ODE vs SDE error dynamics
 flow_matching/                 the CFM identity, interpolants, rectified
                                flow, the score dictionary, the OT fence
 guidance_and_control/          Doob h-transforms, posterior sampling,
