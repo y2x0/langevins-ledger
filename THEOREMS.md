@@ -1,7 +1,7 @@
 # Theorem Index
 
 One line per result proved in full, with the file that carries the
-proof. Grows as phases land (see PLAN.md). Companion indexes:
+proof. All six phases of PLAN.md are complete. Companion indexes:
 [bellmans-ledger](https://github.com/y2x0/bellmans-ledger/blob/main/THEOREMS.md),
 [attention-ledger](https://github.com/y2x0/attention-ledger/blob/main/THEOREMS.md).
 
@@ -110,7 +110,22 @@ proof. Grows as phases land (see PLAN.md). Companion indexes:
 | The parallel-decoding tax = conditional total correlation (exact KL identity) | 05 |
 | The two-token worked case: one-step reveal puts half its mass on impossible strings | 05 |
 
-## The Recurring Instruments (so far)
+## statistical_theory/
+
+| Result | File |
+|---|---|
+| The W₂ stability bound: Grönwall over the synchronous coupling | 01 |
+| The Gaussian error propagator, exact (variation of constants over λ) | 01 |
+| Early stopping = kernel density estimation at bandwidth `σ_t/α_t` (exact reduction) | 02 |
+| The classical KDE rate in 1-D: `MISE(h*) = Θ(n^{−4/5})`, proved | 02 |
+| The generalization trichotomy: smoothing, estimation, solver — no other channel | 03 |
+| Linear score classes: the learned score = the projection of the empirical score | 03 |
+| The two-point formula `x̂₀ = a·tanh(ax/σ²)` and the σ⁻² score blowup | 04 |
+| Denoiser regularity: flat off the medial axis, σ⁻² spike on it (one derivative) | 04 |
+| The subspace case: normal score exactly `−x⊥/σ²`; denoiser = bounded projection | 04 |
+| Guidance displacement `x⊥* = ωcσ_t²` (the failure-mode toy, promoted) | 04 |
+
+## The Recurring Instruments
 
 ```text
 insert-the-kernel-and-divide   Tweedie (02), Vincent's cross term (02),

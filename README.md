@@ -153,11 +153,22 @@ discrete_diffusion/            tokens, masks, and the attention bridge
     05  the parallel-decoding tax = conditional total correlation,
         proved with a worked half-mass-impossible example
 
---- expansion (see PLAN.md for the per-file contract) ---
-
-statistical_theory/            score error propagation, minimax rates,
-                               memorization vs generalization
+statistical_theory/            score error is the whole game
+    01  error propagation: the Gronwall W2 bound and the exact
+        Gaussian propagator (which noise levels' errors survive)
+    02  minimax rates: early stopping = KDE, exactly (proved); the
+        classical 1-D rate proved; the learned-score upgrade located
+    03  memorization vs generalization: the trichotomy; the linear
+        projection theorem; the retrofit to foundations/06
+    04  manifold geometry: the sigma^{-2} blowup, the parametrization
+        ladder, and the medial-axis spike — one tanh formula
+    05  what remains open: the six cross-cutting problems; the
+        trilogy, closed
 ```
+
+All six families of PLAN.md are complete (31 files). The index of
+every result proved in full is THEOREMS.md; the per-file contracts
+are in PLAN.md.
 
 ## Notation
 

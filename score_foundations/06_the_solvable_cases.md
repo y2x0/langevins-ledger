@@ -138,11 +138,18 @@ interval.
 
 ## What Remains Open
 
-The quantitative interpolation: for a model class of given capacity
-trained on `n` samples, WHERE between the empirical score and an
-oracle-smoothed score does the learned score land — the question
-`statistical_theory/` opens with, solved only in kernel-regime toys;
-and the attention correspondence made architectural: whether trained
+Partially closed by the retrofits from `statistical_theory/`: the
+interpolation question now has its solved endpoints — early stopping
+is EXACTLY kernel density estimation at bandwidth `\sigma_t/\alpha_t`
+(`statistical_theory/02`'s reduction, with the classical rate proved),
+and for linear score classes the learned score is exactly the
+`L^2(\hat p_t)`-projection of this file's empirical-attention score
+onto the feature span, generalization being the projection residual
+(`statistical_theory/03`). The open middle is the deep case: which
+smoother a given architecture implements, and the memorization
+transition `n_{mem}` — named in `statistical_theory/05` as the
+field's most consequential open problem. Also still open: the
+attention correspondence made architectural — whether trained
 denoisers implement dataset-attention in any mechanistically
 identifiable way (the interpretability question this file's theorem
 makes well-posed, and which nobody has answered).

@@ -1,5 +1,10 @@
 # PLAN: The Proof Program
 
+**STATUS: complete.** All six phases shipped and both scheduled
+retrofits landed (foundations/05 <- guidance/02; foundations/06 <-
+statistical_theory/03); THEOREMS.md indexes the proved results. Kept
+as the contract the repository was built against.
+
 This document governs all future notebooks in this repository. It is a
 contract, not a wishlist: a family enters only with a per-file
 specification of the results to be proved, and a file ships only if it
