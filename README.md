@@ -131,6 +131,7 @@ guidance_and_control/          steering, exactly and approximately
     05  failure modes: the table of causes, each traced to a theorem
 
 --- expansion (see PLAN.md for the per-file contract) ---
+
 distillation/                  consistency models, progressive
                                distillation, what each proof guarantees
 discrete_diffusion/            CTMC reversal, masked diffusion's ELBO,
