@@ -42,13 +42,36 @@ proof. Grows as phases land (see PLAN.md). Companion indexes:
 | Langevin stationarity of `p`; de Bruijn's identity `d/dt KL = −I` | 06 |
 | LSI ⇒ exponential KL decay of Langevin (Grönwall chain) | 06 |
 
+## flow_matching/
+
+| Result | File |
+|---|---|
+| The marginal velocity generates the path (continuity equation, weak form) | 01 |
+| The CFM identity: per-pair regression = marginal-velocity regression | 01 |
+| The interpolant score formula `s = −E[z|x_t]/γ_t` (latent buys a score) | 02 |
+| Every interpolant carries a λ-dial of exact SDE samplers | 02 |
+| Rectification preserves marginals (under well-posedness) | 03 |
+| Every convex transport cost weakly decreases under rectification (double Jensen) | 03 |
+| Straight couplings are exactly the fixed points; one Euler step exact on them | 03 |
+| Marginal preservation FAILS for the atomic crossing coupling (worked) | 03 |
+| The smoothed crossing rectifies to the monotone coupling (odd-symmetry proof) | 03 |
+| The dictionary: `v* = (β̇/β)x + γ(β̇γ/β − γ̇)s` on Gaussian paths | 04 |
+| Velocity stays regular where the score blows up (endpoint cancellation) | 04 |
+| In d = 1 the FM flow map is monotone, hence optimal transport | 05 |
+| The FM path ≠ the OT geodesic (the two-atom bulge, exact) | 05 |
+
 ## The Recurring Instruments (so far)
 
 ```text
 insert-the-kernel-and-divide   Tweedie (02), Vincent's cross term (02),
                                the mixture ratio E[r|x_t] (05), the
-                               empirical posterior (06) — one
-                               manipulation, four theorems
+                               empirical posterior (06), the
+                               interpolant score (flow_matching/02) —
+                               one manipulation, five theorems
+conditional-expectation        Vincent (foundations/02), CFM
+projection under L2            (flow_matching/01), and the discrete
+                               version to come (E/03) — the trick that
+                               makes every estimand trainable
 p ∇log p = ∇p                  Anderson's reversal, the PF-ODE, the
                                λ-family (foundations/03), Langevin
                                stationarity (samplers/06) — the

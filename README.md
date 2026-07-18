@@ -105,10 +105,22 @@ samplers_and_convergence/      what the sampler provably outputs
     06  Langevin correctors: de Bruijn and LSI decay proved; the
         multimodal boundary and the third metastability
 
+flow_matching/                 the path coordinate, unified and fenced
+    01  continuity + CFM: the marginal-velocity theorem and the CFM
+        identity proved (Vincent's trick, second appearance)
+    02  stochastic interpolants: the latent buys a score (proved);
+        every interpolant has a lambda-dial (proved); the safe region
+    03  rectified flow: marginal preservation, the double-Jensen cost
+        theorem, straight fixed points; the crossing failure and its
+        odd-symmetry resolution, proved
+    04  the dictionary: velocity = a x + b score with derived
+        coefficients; FM = score matching reweighted; endpoint
+        regularity explained
+    05  what FM is not: 1-D IS optimal transport (proved); the path
+        is not the geodesic (worked bulge example); straight != OT
+
 --- expansion (see PLAN.md for the per-file contract) ---
 
-flow_matching/                 the CFM identity, interpolants, rectified
-                               flow, the score dictionary, the OT fence
 guidance_and_control/          Doob h-transforms, posterior sampling,
                                reward fine-tuning as KL control — the
                                bridge to Bellman's Ledger
