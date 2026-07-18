@@ -29,10 +29,15 @@ the denoiser being exactly the Wiener filter (compute
 `E[x_0|x_t]` for jointly Gaussian variables, or substitute the score
 into Tweedie — the two derivations agree, which checks `02`). The
 PF-ODE is linear, hence solvable, and the exact sampler started from
-the prior reproduces `N(\mu, \Sigma)` exactly at `t \to 0`; DDIM with
-exact `\hat x_0` is exact at ANY step count for `\Sigma \propto I`
-(the denoiser is then constant along each trajectory's `u`-line —
-`04`'s frozen-denoiser hypothesis holds with zero error). ∎
+the prior reproduces `N(\mu, \Sigma)` exactly at `t \to 0`. ∎
+CORRECTION (caught by verification/verify.py): an earlier version
+claimed DDIM is exact at any step count for isotropic Gaussians; it
+is not — the Gaussian denoiser `\hat x_0 = v u/(v+\rho^2)` (in the
+`u,\rho` coordinates of `04`) varies along trajectories, so the
+frozen-denoiser hypothesis fails and finite-step DDIM strictly
+contracts the variance (Cauchy–Schwarz on the composed coefficients).
+DDIM is step-count-exact only where `\hat x_0` is genuinely frozen,
+e.g. point-mass data.
 
 The Gaussian case is the calibration standard: every solver in phase
 A is first run here, where its error has a formula. It is also

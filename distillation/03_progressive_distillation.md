@@ -50,18 +50,17 @@ method's failure mode is capacity, not consistency.
 
 ## The Lossless Case, Proved
 
-**Theorem.** For isotropic Gaussian data (`p_0 = N(\mu, c I)`), the
-effective denoiser EQUALS the true denoiser at every round:
-`\tilde x_0 = \hat x_0`, every halving is exact, and `L` rounds of
-progressive distillation lose nothing — the one-step student is the
-exact sampler.
-
-*Proof.* `score_foundations/06`: for isotropic Gaussian data the
-denoiser is affine with `\hat x_0` CONSTANT along each PF-ODE
-trajectory (equivalently, `score_foundations/04`'s frozen-denoiser
-hypothesis holds exactly), so DDIM is the exact flow at ANY step
-size: two steps of the exact flow equal one step of the exact flow,
-and the inversion above returns the true denoiser. ∎
+**Theorem (corrected — the original claim was falsified by
+verification/verify.py).** The halving is lossless iff the denoiser
+is frozen along trajectories — true for point-mass data
+(`\hat x_0 \equiv \mu`), FALSE for isotropic Gaussians: there
+`\hat x_0 = vu/(v+\rho^2)` varies along the path, two DDIM steps do
+not compose to one (the `u`-coefficients `(v+\rho_i\rho_j)/(v+\rho_j^2)`
+multiply to something strictly below the one-step coefficient, by
+Cauchy–Schwarz), and the effective denoiser `\tilde x_0` differs from
+the true one — which is exactly why the target derivation above is
+needed at all. The student absorbs a REAL, computable curvature even
+in the Gaussian case; the lossless case is the degenerate one. ∎
 
 The calibration reading, as always in this repository: the solvable
 case is the UNREPRESENTATIVE one — it is precisely the data whose
