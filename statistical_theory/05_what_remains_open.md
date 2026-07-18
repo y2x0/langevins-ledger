@@ -62,15 +62,22 @@ attackable with the tools already on the shelf (covering numbers
 from attention-ledger's phase H, the Bregman lemma, the
 total-correlation identity).
 
-**6. Design against the ledgers.** Three dials recur without an
-optimality theorem anywhere: the noise schedule / masking measure
-(priced in `A/01`, fixed by the ELBO in `E/02`, free at sampling),
-the loss weighting across noise levels (foundations/02, `01`'s
-propagator as the missing criterion), and the interpolant's
-`\gamma_t` (flow_matching/02, `04`'s blowup management). Each is a
-one-dimensional design problem with its objective now computable
-from this repository's theorems; none has been solved even in the
-Gaussian caricature.
+**6. Design against the ledgers.** CLOSED at the level posed, by
+retrofit: `07` solves each dial in the Gaussian caricature. The
+sampling grid: optimal step density `\propto \beta_t
+e^{-\lambda^2B(t)/2}` (uniform in `\alpha^{\lambda^2}`), with
+schedule-INVARIANT optimal error
+`(1-(\alpha_T/\alpha_{t_{\min}})^{\lambda^2})^2/K`; the training
+weight: the minimax-optimal `w^*` is THE SAME measure — `01`'s
+propagator profile, its closing conjecture now a saddle-point
+theorem; the interpolant: the CFM floor is the angular energy
+`\int\rho^2\dot\theta^2`, uniquely minimized among VP paths by the
+trigonometric schedule (`\pi^2/4`), and the endpoint DICHOTOMY — the
+floor is finite iff `\gamma` vanishes faster than `\sqrt{1-t}`, the
+score target is integrable iff slower: no path carries both
+estimands into the data, and the bridge rate is the shared critical
+point. Still open there: everything beyond the caricature, and the
+joint (grid `\times` weight `\times` path) problem.
 
 ## What The Repository Claims To Have Settled
 

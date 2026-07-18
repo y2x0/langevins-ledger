@@ -170,6 +170,10 @@ statistical_theory/            score error is the whole game
     06  mode weights: the martingale/defect lemma, the mode-Fisher
         budget = O(1) at the merge scale (added post-F, closing
         problem 3)
+    07  the design dials: grid, weight, and interpolant each solved
+        in the Gaussian caricature — one measure rules grid and
+        weight; the endpoint dichotomy (added post-F, closing
+        problem 6)
 ```
 
 All six families of PLAN.md are complete (31 files). The index of

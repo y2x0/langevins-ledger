@@ -136,11 +136,13 @@ correctors.
 
 ## What Remains Open
 
-Optimal grids: the schedule-sensitivity reading gives the right
-qualitative rule, but the provably optimal step allocation for a
-given data class and budget is open beyond Gaussian and kernel toys
-(same open problem as `score_foundations/04` flagged, now with the
-error functional visible); and sharp constants for the weak error of
+Optimal grids: the Gaussian case is now CLOSED —
+`statistical_theory/07` minimizes this file's error functional
+exactly (step density `\propto \beta e^{-\lambda^2B/2}`, uniform in
+`\alpha^{\lambda^2}`, with schedule-invariant optimal error
+`(1-(\alpha_T/\alpha_{t_{\min}})^{\lambda^2})^2/K`); beyond Gaussian
+and kernel toys the allocation remains open (same open problem as
+`score_foundations/04` flagged); and sharp constants for the weak error of
 EM near `t_{\min}` on manifold-supported data — where the smoothness
 hypotheses degrade at a known rate (`statistical_theory/04`) but the
 integrated cost has no tight two-sided bound.

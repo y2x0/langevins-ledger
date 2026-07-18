@@ -151,9 +151,13 @@ relocated rather than replaced: VP diffusion is the
 ## What Remains Open
 
 Design selection inside the safe region: `\gamma`'s interior profile
-trades score-target conditioning against velocity-target variance,
-and no result identifies the optimum for a data class (the family's
-version of the schedule question, third appearance); couplings beyond
+trades score-target conditioning against velocity-target variance —
+the Gaussian caricature is now CLOSED (`statistical_theory/07`: the
+trigonometric path uniquely minimizes the CFM floor among VP
+interpolants, and the endpoint rates obey a strict dichotomy at
+`\gamma \sim \sqrt{1-t}`, the bridge rate); the optimum for general
+data classes stays open (the family's version of the schedule
+question, third appearance); couplings beyond
 independence interact with everything here (`03`, `05`); and the
 one-sided interpolants — noise only at the data end, where it
 regularizes exactly the `t_{\min}` singularity — lack the sharp

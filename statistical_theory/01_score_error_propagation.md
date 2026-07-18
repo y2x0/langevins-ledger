@@ -131,6 +131,7 @@ The mixed bound (strong metric, trainable norm — the annotation
 above); propagators beyond the linear case (the fundamental-matrix
 statement made quantitative for multimodal data would explain
 mode-weight sensitivity, `A/06`'s open item, from the estimation
-side); and using the propagator as a DESIGN principle — reweighting
-training loss by the propagator's profile per intended sampler is an
-obvious, untried corollary.
+side); and using the propagator as a DESIGN principle — now `07`'s
+minimax theorem: the propagator profile IS the optimal training
+weight, and the same measure is the optimal step allocation. What
+remains of the corollary is its non-Gaussian and empirical versions.

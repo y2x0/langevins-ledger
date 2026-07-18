@@ -129,6 +129,11 @@ proof. All six phases of PLAN.md are complete. Companion indexes:
 | The mode posterior is a λ=1 reverse-time martingale; the `λ²−1` defect computed | 06 |
 | The mode-weight bound: `|ŵ−w| ≤` score error × the mode-Fisher budget | 06 |
 | The budget is O(1) and spent at the merge scale (one bit, one window) | 06 |
+| The optimal grid: density ∝ `βe^{−λ²B/2}`; error `(1−(α_T/α_min)^{λ²})²/K`, schedule-invariant | 07 |
+| The minimax training weight = the SAME measure (the propagator profile; saddle point) | 07 |
+| The CFM floor = the angular energy `∫ρ²θ̇²` (the Wronskian identity, polar) | 07 |
+| The trigonometric path uniquely minimizes the VP floor (value `π²/4`) | 07 |
+| The endpoint dichotomy: velocity floor and score target never both integrable; the bridge rate is critical | 07 |
 
 ## The Recurring Instruments
 

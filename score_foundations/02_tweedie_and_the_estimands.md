@@ -154,7 +154,10 @@ also sufficient: it is the only unknown in the time-reversed dynamics.
 
 The optimal weighting question — which emphasis over noise levels
 minimizes SAMPLE-quality metrics rather than likelihood — has
-empirical winners and no theory connecting them to data properties;
+empirical winners and no theory connecting them to data properties
+(the output-ERROR version is now solved in the Gaussian caricature:
+`statistical_theory/07`'s minimax weight; the sample-quality version
+is the metric gap and stays open);
 and the finite-capacity interaction between estimand choice and
 architecture (what `\varepsilon`- vs `v`-networks spend their
 capacity on) is measured, not derived.
