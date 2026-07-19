@@ -294,5 +294,36 @@ for eps in (0.5, 1.0, 4.0):
 check("entropic OT (Gaussian): Sinkhorn Cov = sqrt(a^2b^2+eps^2/4)-eps/2",
       ok9, "; ".join(det9))
 
+# -- schrodinger_bridges/02: OU-reference bridge coupling --------------------
+# mu = N(0, s^2), reference = VP forward (alpha = e^{-T/2}, sig2 = 1-alpha^2):
+# static problem = entropic OT, cost (y - alpha x)^2/2, temperature sig2.
+# (a) nu = N(0,1): Sinkhorn Cov(x,y) must equal
+#     c* = [sqrt(alpha^2 s^2 + sig2^2/4) - sig2/2]/alpha;
+# (b) nu = p_T = N(0, alpha^2 s^2 + sig2): f = g = 1 exactness, Cov = alpha s^2.
+s10 = 1.2
+za = np.linspace(-6 * s10, 6 * s10, 401)
+mu10 = np.exp(-za**2 / (2 * s10**2)); mu10 /= mu10.sum()
+ok10, det10 = True, []
+for T10 in (0.2, 1.0, 3.0):
+    al = np.exp(-T10 / 2); sg2 = 1 - al**2
+    for case, bvar in (("prior", 1.0), ("p_T", al**2 * s10**2 + sg2)):
+        zb = np.linspace(-6 * np.sqrt(bvar), 6 * np.sqrt(bvar), 401)
+        nu10 = np.exp(-zb**2 / (2 * bvar)); nu10 /= nu10.sum()
+        lK = -0.5 * (zb[None, :] - al * za[:, None])**2 / sg2
+        lf, lg2 = np.zeros_like(mu10), np.zeros_like(nu10)
+        for _ in range(2000):
+            lg2 = np.log(nu10) - lse(lK + lf[:, None], axis=0)
+            lf = np.log(mu10) - lse(lK + lg2[None, :], axis=1)
+        pi10 = np.exp(lf[:, None] + lK + lg2[None, :])
+        c_num = np.sum(pi10 * za[:, None] * zb[None, :])
+        if case == "prior":
+            c_th = (np.sqrt(al**2 * s10**2 + sg2**2 / 4) - sg2 / 2) / al
+        else:
+            c_th = al * s10**2                  # exactness: bridge = reference
+        ok10 &= abs(c_num - c_th) < 5e-3
+        det10.append(f"T={T10}/{case}: {c_num:.4f} vs {c_th:.4f}")
+check("OU bridge: Sinkhorn = closed form; nu = p_T gives Q* = R exactly",
+      ok10, "; ".join(det10))
+
 print(f"\n{sum(PASS)}/{len(PASS)} checks passed")
 raise SystemExit(0 if all(PASS) else 1)
