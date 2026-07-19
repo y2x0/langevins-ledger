@@ -269,5 +269,30 @@ check("reveal-schedule identity T = C - sum I(x;pred) (3 schedules)",
       and abs(tax_direct([[0], [1], [2]])) < 1e-9,
       f"C={C8:.5f}; one-shot tax=C, serial tax=0 both verified")
 
+# -- schrodinger_bridges/01: entropic OT Gaussian closed form ----------------
+# a=1, b=2: run discrete Sinkhorn on N(0,1) x N(0,4), c=|x-y|^2/2, and
+# compare Cov(x,y) of the plan to c_eps = sqrt(a^2 b^2 + eps^2/4) - eps/2.
+za = np.linspace(-6, 6, 401)                    # x-grid, std 1
+zb = np.linspace(-12, 12, 401)                  # y-grid, std 2
+mu9 = np.exp(-za**2 / 2); mu9 /= mu9.sum()
+nu9 = np.exp(-zb**2 / 8); nu9 /= nu9.sum()
+def lse(M, axis):                               # log-sum-exp along axis
+    m = M.max(axis=axis, keepdims=True)
+    return (m + np.log(np.exp(M - m).sum(axis=axis, keepdims=True))).squeeze(axis)
+ok9, det9 = True, []
+for eps in (0.5, 1.0, 4.0):
+    lK = -0.5 * (za[:, None] - zb[None, :])**2 / eps
+    lf, lg = np.zeros_like(mu9), np.zeros_like(nu9)
+    for _ in range(3000):                       # log-domain Sinkhorn
+        lg = np.log(nu9) - lse(lK + lf[:, None], axis=0)
+        lf = np.log(mu9) - lse(lK + lg[None, :], axis=1)
+    pi9 = np.exp(lf[:, None] + lK + lg[None, :])
+    c_num = np.sum(pi9 * za[:, None] * zb[None, :])
+    c_th = np.sqrt(1.0 * 4.0 + eps**2 / 4) - eps / 2
+    ok9 &= abs(c_num - c_th) < 5e-3
+    det9.append(f"eps={eps}: {c_num:.4f} vs {c_th:.4f}")
+check("entropic OT (Gaussian): Sinkhorn Cov = sqrt(a^2b^2+eps^2/4)-eps/2",
+      ok9, "; ".join(det9))
+
 print(f"\n{sum(PASS)}/{len(PASS)} checks passed")
 raise SystemExit(0 if all(PASS) else 1)
