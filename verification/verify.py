@@ -325,5 +325,28 @@ for T10 in (0.2, 1.0, 3.0):
 check("OU bridge: Sinkhorn = closed form; nu = p_T gives Q* = R exactly",
       ok10, "; ".join(det10))
 
+# -- schrodinger_bridges/03: Gaussian IPF = Mobius map, rate rho^4 -----------
+# a=1, b=2, eps=1 (q = 1/eps): p_{n+1} = 1/a^2 + q^2/(1/b^2 + q^2/p_n).
+# Fixed point must reproduce 01's plan (Var a^2, b^2; Cov c_eps) and the
+# error ratio must converge to rho^4 with rho = c_eps/(ab).
+a11, b11, eps11 = 1.0, 2.0, 1.0
+q11 = 1 / eps11
+c11 = np.sqrt(a11**2 * b11**2 + eps11**2 / 4) - eps11 / 2
+p11, hist = 1 / a11**2, []
+for _ in range(60):
+    hist.append(p11)
+    p11 = 1 / a11**2 + q11**2 / (1 / b11**2 + q11**2 / p11)
+r11 = 1 / b11**2 + q11**2 / p11
+det11 = p11 * r11 - q11**2
+vx, vy, cv = r11 / det11, p11 / det11, q11 / det11
+errs = np.abs(np.array(hist) - p11)
+ratio = errs[8] / errs[7]
+rho4 = (c11 / (a11 * b11))**4
+check("Gaussian IPF: fixed point = entropic plan; contraction = rho^4",
+      abs(vx - a11**2) < 1e-12 and abs(vy - b11**2) < 1e-12
+      and abs(cv - c11) < 1e-12 and abs(ratio - rho4) < 1e-3,
+      f"Var=({vx:.4f},{vy:.4f}) Cov={cv:.4f} vs {c11:.4f}; "
+      f"rate={ratio:.4f} vs rho^4={rho4:.4f}")
+
 print(f"\n{sum(PASS)}/{len(PASS)} checks passed")
 raise SystemExit(0 if all(PASS) else 1)
